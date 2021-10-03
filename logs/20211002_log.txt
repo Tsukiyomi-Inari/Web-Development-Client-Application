@@ -1,0 +1,19 @@
+Sign in attempt at [2021-10-02 15:45:43] by user [] fail.
+Sign in attempt at [2021-10-02 15:48:46] by user [] fail.
+Sign in attempt at [2021-10-02 15:59:03] by user [] fail.
+Sign in attempt at [2021-10-02 15:59:24] by user [] fail.
+Sign in attempt at [2021-10-02 16:00:16] by user [] fail.
+Sign in attempt at [2021-10-02 16:00:26] by user [salem@gmail.ca] success.
+Logged out at [2021-10-02 16:02:54] by user [] .
+Sign in attempt at [2021-10-02 16:03:55] by user [salem@gmail.ca] success.
+Logged out at [2021-10-02 16:25:40] by user [] .
+Sign in attempt at [2021-10-02 16:26:16] by user [salem@gmail.ca] success.
+Logged out at [2021-10-02 16:26:18] by user [] .
+Sign in attempt at [2021-10-02 16:29:10] by user [salem@gmail.ca] success.
+Logged out at [2021-10-02 16:29:12] by user [] .
+Sign in attempt at [2021-10-02 16:30:29] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-02 16:31:03] by user [salem@gmail.ca] success.
+Logged out at [2021-10-02 16:31:05] by user [] .
+Sign in attempt at [2021-10-02 16:32:35] by user [salem@gmail.ca] success.
+Logged out at [2021-10-02 16:32:37] by user [] .
+Sign in  at [2021-10-02 16:36:43] by user [salem@gmail.ca] success.
