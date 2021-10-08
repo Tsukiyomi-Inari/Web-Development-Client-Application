@@ -66,5 +66,11 @@ function user_authenticate($email, $plain_password)
     return $authenticated;
 } 
 
+function user_exists($email){
+    $result = user_select($email);
+    return (pg_num_rows($result) >= True);
+
+}
+
 
 ?>
