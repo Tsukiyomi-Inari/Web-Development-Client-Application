@@ -15,13 +15,14 @@ $author = "bellmank";
 $description = "User dashboard page for WEBD3201 course project";
 
 include "./includes/header.php";
+//var_dump($_SESSION['user']);
 
-if(!isset($_SESSION[$user]))
+if(!isset($_SESSION['user']))
 {
     redirect("sign-in.php");
 }
 else{
-    $login_victory = "Welcome back, .$user. you last logged in .$last_login.";
+    $login_victory = "Welcome back, ".$_SESSION['first_name']." you last logged in ".$_SESSION['last_access'];
     setMessage($login_victory);
 }
 ?>   

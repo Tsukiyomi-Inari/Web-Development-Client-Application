@@ -1,0 +1,24 @@
+Logged out at [2021-10-12 15:03:03] by user [] .
+Sign in  at [2021-10-12 15:05:13] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 15:05:24] by user [] .
+Sign in  at [2021-10-12 15:09:12] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 15:26:39] by user [] .
+Sign in  at [2021-10-12 15:26:47] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 15:34:18] by user [] .
+Sign in  at [2021-10-12 15:34:24] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 15:34:38] by user [] .
+Sign in attempt at [2021-10-12 15:34:48] by user [kbellman@gmail.ca] fail.
+Sign in  at [2021-10-12 15:43:24] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 15:47:23] by user [] .
+Sign in  at [2021-10-12 15:47:29] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 15:57:43] by user [] .
+Sign in  at [2021-10-12 15:57:51] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 16:00:25] by user [] .
+Sign in  at [2021-10-12 16:00:30] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 16:19:26] by user [] .
+Sign in  at [2021-10-12 16:19:31] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 16:19:51] by user [] .
+Sign in  at [2021-10-12 16:19:55] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 16:20:20] by user [] .
+Sign in  at [2021-10-12 16:20:39] by user [salem@gmail.ca] success.
+Logged out at [2021-10-12 20:00:23] by user [] .

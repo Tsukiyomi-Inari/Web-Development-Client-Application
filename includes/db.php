@@ -57,9 +57,12 @@ function user_authenticate($email, $plain_password)
     if(pg_num_rows($result)==1)
     {
         $user = pg_fetch_assoc($result,0);
-        if(password_verify($plain_password, $user["password"]))  //check that password and user correct pair
+        $is_verified = password_verify($plain_password, $user["password"]);
+        if($is_verified == 1)  //check that password and user correct pair
         {
-            $_SESSION['user'] = $user; // add the user info to session
+            $_SESSION['last_access'] = $user['last_access'];
+            $_SESSION['first_name'] = $user['first_name'];
+            $_SESSION['user'] = $is_verified; // add the user info to session
             $authenticated = true; //user is valid/authenticated
         }
     }

@@ -20,7 +20,7 @@ $handle =fopen("./logs/".$today."_log.txt",'a');
  if(isset($_SESSION['user']))
                     {
                         
-                        fwrite($handle, "Logged out at [".$now."] by user [".$email_address."] .\n");
+                        fwrite($handle, "Logged out at [".$now."] by user [".$_SESSION['email_address']."] .\n");
                          fclose($handle);
                         //unset the session
                         session_unset();
