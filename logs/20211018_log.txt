@@ -1,2 +1,68 @@
 Sign in  at [2021-10-18 10:54:03] by user [salem@gmail.ca] success.
 Logged out at [2021-10-18 10:54:10] by user [] .
+Sign in attempt at [2021-10-18 13:55:18] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:55:40] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:56:12] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:57:08] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:57:43] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:57:55] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:58:00] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:58:47] by user [salem@gmail.ca] fail.
+Sign in attempt at [2021-10-18 13:58:54] by user [jdoe@dcmail.ca] fail.
+Sign in attempt at [2021-10-18 14:06:37] by user [jdoe@dcmail.ca] fail.
+Sign in attempt at [2021-10-18 14:11:04] by user [jdoe@dcmail.ca] fail.
+Sign in attempt at [2021-10-18 14:20:50] by user [jdoe@dcmail.ca] fail.
+Sign in attempt at [2021-10-18 14:21:17] by user [jdoe@dcmail.ca] fail.
+Sign in attempt at [2021-10-18 14:21:30] by user [jdoe@dcmail.ca] fail.
+Sign in  at [2021-10-18 14:22:01] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:32:58] by user [] .
+Sign in  at [2021-10-18 14:33:05] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:48:16] by user [] .
+Sign in  at [2021-10-18 14:48:22] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:49:58] by user [] .
+Sign in  at [2021-10-18 14:50:04] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:50:31] by user [] .
+Sign in  at [2021-10-18 14:50:36] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:51:11] by user [] .
+Sign in  at [2021-10-18 14:51:19] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:51:42] by user [] .
+Sign in  at [2021-10-18 14:51:50] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:53:30] by user [] .
+Sign in  at [2021-10-18 14:53:36] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:54:19] by user [] .
+Sign in  at [2021-10-18 14:54:25] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:55:07] by user [] .
+Sign in  at [2021-10-18 14:55:12] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:57:28] by user [] .
+Sign in  at [2021-10-18 14:57:33] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 14:59:53] by user [] .
+Sign in  at [2021-10-18 15:08:21] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 15:08:23] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 17:48:30] by user [bellmanart@gmail.com] success.
+Logged out at [2021-10-18 17:56:11] by user [bellmanart@gmail.com] .
+Sign in attempt at [2021-10-18 17:56:18] by user [salem@gmail.ca] fail.
+Sign in  at [2021-10-18 17:57:10] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:00:54] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:01:00] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:09:04] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:09:10] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:49:30] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:49:38] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:54:08] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:54:19] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:56:02] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:56:09] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:57:57] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:58:05] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 18:58:10] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 18:58:16] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 21:24:56] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 21:25:08] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 21:26:56] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 21:27:19] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 21:45:39] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 21:45:49] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 21:46:36] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 21:46:42] by user [salem@gmail.ca] success.
+Logged out at [2021-10-18 21:59:56] by user [salem@gmail.ca] .
+Sign in  at [2021-10-18 22:00:04] by user [salem@gmail.ca] success.

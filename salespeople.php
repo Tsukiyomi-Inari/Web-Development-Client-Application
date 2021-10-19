@@ -4,8 +4,9 @@
  * @author Katherine Bellman <katherine.bellman@dcmail.ca>
  * @Student Id:100325825
  * @course: WEBD3201
- * @Date: October 6th, 2021
- * 
+ * @Date:       October 6th, 2021
+ *
+ * @Modified:   October 10th - 18th - Lab 2 requirements
  */
 
 $title = "WEBD3201 Sales People Registration";
@@ -13,6 +14,11 @@ $author = "bellmank";
 $description = "Sales People Registration page for WEBD3201 course project";
 
 include "./includes/header.php";
+
+if(!(isset($_SESSION['user']['type'])&&($_SESSION['user']['type']==ADMIN))){
+    redirect("sign-in.php");
+}
+
 $error ="";
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     $email_address = "";
@@ -21,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $password = "";
     $password2 = "";
 
-}else if($_SERVER["REQUEST_METHOD"] == "POST"){
+}elseif($_SERVER["REQUEST_METHOD"] == "POST"){
     $fName = trim($_POST["inputFName"]);
     $lName = trim($_POST["inputLName"]);
     $email_address = trim($_POST["inputEmail"]);
@@ -29,36 +35,45 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $password2 = trim($_POST["confirmPassword"]);
     //validate first name
     if(!isset($fName) || $fName == ""){
-        $error .= "error message";
+        $error .= "You must enter your first name.<br/>";
     }
     //validate last name
     if(!isset($lName) || $lName == ""){
-        $error .= "error message";
+        $error .= "You must enter your last name.<br/>";
     }
     if(!isset($email_address) || $email_address == ""){
-        $error .= "error message";
+        $error .= "You must enter your e-mail.<br/>";
     }
     elseif(!(filter_var($email_address, FILTER_VALIDATE_EMAIL))){
-        $error .= " error message";
+        $error .= "<em>".$email_address."</em> is not a valid e-mail address.<br/>";
         $email_address = "";
     }
-    /* elseif(user_exists($email_address)){
-        $error .= "error message";
+    elseif(user_exists($email_address)){
+        $error .= "<em>(".$email_address.")</em> alredy exists. <br/>";
         $email_address = "";
-    } */
+    }
     if(!isset($password) || $password == "" || !isset($password2) || $password2 == ""){
-        $error .="message";
+        $error .="You must enter a password. <br/>";
         
     }
-    elseif(strcmp($password, $password2) == 0){
-        $error = "";
+    elseif(strcmp($password, $password2) == 1){
+        $error .= "Submitted password and confirm password should be the same. <br/>";
     }
     if($error !=""){
-        $error .= "Try again";
-        setMessage($error);
+        $error .= "<br/> <strong><em>Please Try Again</em></strong>";
+        $error2 = '<div style="text-align: center;" class="alert alert-warning" role="alert"> '.$error.' </div>';
+        setMessage($error2);
+        $error = "";
+        $error2 = "";
     }
-    if(){
-        
+    else{
+        insert_user($email_address, $password, $fName, $lName, date('Y-m-d G:i:s'));
+        setMessage('<div style="text-align: center;" class="alert alert-success" role="alert">You succesfully registered<br/> the sales person</div>') ;
+    }
+
+    if(isset($_SESSION['message'])){
+        $message = $_SESSION['message'];
+        unset($_SESSION['message']);
     }
 }
 
@@ -66,26 +81,45 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 
 
 
-<form class="form-signin" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <?php echo $message ?>
+    <?php 
+    echo $message; 
+    //salesperson = user
+    $form_salesperson = array( //outter array
+                                array(//inner array [0]
+                                    "type" => "text",
+                                    "name" => "first_name",
+                                    "value" => "",
+                                    "label" => "First Name",
+                                ),
+                                array(//inner array [1]
+                                    "type" => "text",
+                                    "name" => "last_name",
+                                    "value" => "",
+                                    "label" => "Last Name",
+                                ),
+                                array(//inner array [2]
+                                    "type" => "email",
+                                    "name" => "email",
+                                    "value" => "",
+                                    "label" => "Email",
+                                ),
+                                array(//inner array [3]
+                                    "type" => "password",
+                                    "name" => "password",
+                                    "value" => "",
+                                    "label" => "Password",
+                                ),
+                                array(//inner array [4]
+                                    "type" => "password",
+                                    "name" => "password2",
+                                    "value" => "",
+                                    "label" => "Confirm Password",
+                                )
+                            );
 
-    <label for="inputFName" class="sr-only">First Name</label>
-    <input type="text" name="inputFName" id="inputFName" value="<?php echo $fName?>"class="form-control" placeholder="First Name" required autofocus>
-    <label for="inputLName" class="sr-only">Last Name</label>
-    <input type="text" name="inputLName" id="inputLName" value="<?php echo $lName?>" class="form-control" placeholder="Last Name" required autofocus>
-    
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" name="inputEmail" id="inputEmail" value="<?php echo $email_address?>" class="form-control" placeholder="Email address" required autofocus>
+    display_form($form_salesperson);
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-    <label for="confirmPassword" class="sr-only">Reenter Password</label>
-    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Re-enter Password" required>
-   
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-    <button class="btn btn-lg btn-primary btn-block" type="reset">Clear</button>
-</form>
+    ?>
 
                     
                      

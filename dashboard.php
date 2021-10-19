@@ -6,6 +6,8 @@
  * @course: WEBD3201
  * @Date: September 12, 2021
  * 
+ * @Modified:   October 11th 2021 - Lab fixes
+ *              October 18th 2021 - ""
  */
 ?>
 
@@ -21,14 +23,16 @@ if(!isset($_SESSION['user']))
 {
     redirect("sign-in.php");
 }
-else{
-    $login_victory = "Welcome back, ".$_SESSION['first_name']." you last logged in ".$_SESSION['last_access'];
-    setMessage($login_victory);
+else
+{
+    sign_in_msg($_SESSION['user']);
+    getMessage();
+    unset($_SESSION['message']);
 }
 ?>   
 <h1 class="h2">Dashboard</h1>
-<h2><?php echo $message; ?>
- </h2>
+<?php echo $message; ?>
+
 <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
     <button class="btn btn-sm btn-outline-secondary">Share</button>

@@ -22,10 +22,10 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (email_address, password, first_name, last_name, last_access, enrol_date, enable, type) 
-VALUES ('jdoe@dcmail.ca',crypt('some_password', gen_salt('bf')),'John', 'Doe','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 'c');
+VALUES ('jdoe@dcmail.ca',crypt('some_password', gen_salt('bf')),'John', 'Doe','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 'a');
 
 INSERT INTO users (email_address, password, first_name, last_name, last_access, enrol_date, enable, type) 
-VALUES ('jhele@dcmail.ca',crypt('that_password', gen_salt('bf')),'James', 'Hele','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 'd');
+VALUES ('jhele@dcmail.ca',crypt('that_password', gen_salt('bf')),'James', 'Hele','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 'a');
 
 INSERT INTO users (email_address, password, first_name, last_name, last_access, enrol_date, enable, type) 
 VALUES ('kbellman@gmail.ca',crypt('got_password', gen_salt('bf')),'Keith', 'Bellman','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 'a');

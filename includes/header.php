@@ -11,6 +11,8 @@
  * @course: WEBD3201
  * @Date: September 12, 2021
  * 
+ * @Modified:   October 10th 2021 - re:messaging
+ *              October 18th 2021 - Re: favicon 
  */
 
     ob_start();
@@ -25,6 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="<?php echo $description ?>">
     <meta name="author" content="<?php echo $author ?>">
+    <!-- Favicon scripts -->
     <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
@@ -90,6 +93,30 @@
                  }
                 ?>
                 </li>
+                <li class="nav-item">
+                <?php
+                if(isset($_SESSION['user']['type'])&&($_SESSION['type']==ADMIN))
+                {
+
+                    echo '<a class="nav-link active" href="salespeople.php">
+                        <span data-feather="home"></span>
+                        Salespeople Registration <span class="sr-only">(current)</span>
+                        </a>';
+                }
+                ?>
+                </li>   
+                <li class="nav-item">
+                <?php
+                if(isset($_SESSION['user']['type'])&&($_SESSION['type']==ADMIN))
+                {
+
+                    echo '<a class="nav-link active" href="clients.php">
+                        <span data-feather="home"></span>
+                        Clients Registration <span class="sr-only">(current)</span>
+                        </a>';
+                }
+                ?>
+                </li>   
                 <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file"></span>

@@ -22,12 +22,49 @@ if(!isset($_SESSION['user']))
 {
     redirect("sign-in.php");
 }
-else{
-    $login_victory = "Welcome back, ".$_SESSION['first_name']." you last logged in ".$_SESSION['last_access'];
-    setMessage($login_victory);
-}
+
 ?>   
 
+<?php 
+    echo $message; 
+    //Client form array
+    $form_client = array( //outter array
+                            array(//inner array [0]
+                                "type" => "text",
+                                "name" => "first_name",
+                                "value" => "",
+                                "label" => "First Name",
+                            ),
+                            array(//inner array [1]
+                                "type" => "text",
+                                "name" => "last_name",
+                                "value" => "",
+                                "label" => "Last Name",
+                            ),
+                            array(//inner array [2]
+                                "type" => "number",
+                                "name" => "phone_number",
+                                "value" => "",
+                                "label" => "Phone Number",
+                            ),
+                            array(//inner array [3]
+                                "type" => "number",
+                                "name" => "extension",
+                                "value" => "",
+                                "label" => "Extension",
+                            ),
+                            array(//inner array [4]
+                                "type" => "email",
+                                "name" => "email",
+                                "value" => "",
+                                "label" => "Email",
+                            )
+                        );
+
+
+    display_form($form_client);
+
+    ?>
 
 <?php
 include "./includes/footer.php";

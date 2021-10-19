@@ -6,13 +6,15 @@
 DROP TABLE IF EXISTS calls;
 
 DROP SEQUENCE IF EXISTS call_id_seq CASCADE;
-CREATE SEQUENCE call_id_seq START 1000;
+CREATE SEQUENCE call_id_seq START 9000;
 
 CREATE TABLE calls (
     id INT PRIMARY KEY DEFAULT nextval('calls_id_seq'),
     client_name VARCHAR(128),
-    call_time TIMESTAMP
-   
+    call_time TIMESTAMP,
 );
 
 INSERT INTO calls ('Matt' ,'2020-06-22 19:10:25');
+INSERT INTO calls ('Johanna' ,'2020-08-10 12:15:26');
+
+SELECT * FROM calls;

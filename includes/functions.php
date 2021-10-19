@@ -100,6 +100,49 @@ function dump($arg){
     echo "</pre>";
 }
 
+//Template for creating associative arrays for display_form() function
+/* $arrForm(
+    array( //outter array
+        array(//inner array [0]
+            "type" => "text",
+            "name" => "first_name",
+            "value" => "",
+            "label" => "First Name",
+        ),
+        array(//inner array [1]
+            "type" => "text",
+            "name" => "last_name",
+            "value" => "",
+            "label" => "Last Name",
+        ),
+        array(//inner array [2]
+            "type" => "email",
+            "name" => "email",
+            "value" => "",
+            "label" => "Email",
+        ),
+        array(//inner array [3]
+            "type" => "number",
+            "name" => "extension",
+            "value" => "",
+            "label" => "Extension",
+        )
+    )
+);
+ */
+function display_form($arrForm)
+{
+    echo '<form class="form-signin" method="POST" action="'.$_SERVER['PHP_SELF'].'">'; 
+    echo '<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>';
+    foreach($arrForm as $element){
+        echo '<label for="'.$element['name'].'" class="sr-only">'.$element['label'].'</label>';
+        echo '<input type="'.$element['type'].'" name="'.$element['name'].'" id="'.$element['name'].'" value="'.$element['value'].'"class="form-control" placeholder="'.$element['label'].'" required autofocus>';
+        
+    }
+    echo '<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>';
+    echo '<button class="btn btn-lg btn-primary btn-block" type="reset">Clear</button>';
+    echo '</form>';
+}
 
 ?>
 
