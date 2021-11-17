@@ -12,7 +12,7 @@
 
 
 /**
- * Function that returns information script inoter to connect to database
+ * Function that returns information script in order to connect to database
  * 
  * @return conn for connecting to database server
  */
@@ -25,9 +25,7 @@ function db_connect(){
 $conn = db_connect();
 
 
-
 //$user_select_all = pg_prepare($conn,"user_select_all" ,"SELECT * FROM users ");
-
 
 
 $user_select = pg_prepare($conn, "user_select", "SELECT * FROM users WHERE email_Address = $1");
@@ -59,10 +57,12 @@ function user_authenticate($email, $plain_password)
         $user = pg_fetch_assoc($result,0);
         $is_verified = password_verify($plain_password, $user["password"]);
         if($is_verified == 1)  //check that password and user correct pair
-        {   $_SESSION['email'] = $user['email_address']; //for
+        {   $_SESSION['email'] = $user['email_address']; //for email
             $_SESSION['last_access'] = $user['last_access']; //for flash message use
             $_SESSION['first_name'] = $user['first_name']; // for flash message use
-            $_SESSION['type'] = $user['type']; 
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['type'] = $user['type']; //attempt to grab their user type
+            $_SESSION['user'] = $user['user'];
             $_SESSION['user'] = $is_verified; // add the user info to session
             $authenticated = true; //user is valid/authenticated
 
@@ -71,21 +71,26 @@ function user_authenticate($email, $plain_password)
     return $authenticated;
 } 
 
+/**
+ * Confirms if user exists
+ * @return bool if exists
+ */
 function user_exists($email){
     $result = user_select($email);
     return (pg_num_rows($result) >=1)?true:false;
 }
 
+//USER LOGIN
 $user_update_login_time = pg_prepare($conn, "user_login_time", "UPDATE users SET last_access=$1 WHERE email_address=$2");
 
 function user_update_login_time($email){
     //update user's record to change last login timestamp to the current timestamp
     global $conn;
     $now = date("Y-m-d G:i:s");
-    $result = pg_execute($conn, "update_login_time", array($now, $email));
+    return pg_execute($conn, "user_login_time", array($now, $email));
 }
 
-//"User" but actually sales person
+//AGENT REGISTER
 $user_insert = pg_prepare($conn, "user_insert","INSERT INTO users(email_address, password, first_name, last_name, enrol_date, enable, type) VALUES ($1, $2, $3, $4, $5, true, 'a')");
 
 function insert_user($email, $password, $fname, $lname, $enroldate)
@@ -95,10 +100,12 @@ function insert_user($email, $password, $fname, $lname, $enroldate)
     return pg_execute($conn, "user_insert", array($email,password_hash($password, PASSWORD_BCRYPT),$fname, $lname, $enroldate));
 }
 
-//"CLIENT"
-function insert_client($email, $fname, $lname, $phone, $extension, $salesID){
+// CLIENT REGISTER
+$client_insert = pg_prepare($conn, "client_insert", "INSERT INTO clients(first_name, last_name, phone_number, extension, email_address, salesperson_id ) VALUES ($1, $2, $3, $4, $5, $6)");
+
+function insert_client($fname, $lname, $phone, $extension, $email, $salesID){
     global $conn;
-    return pg_execute($conn, "client_insert", array($email,$fname, $lname, $phone, $extension, $salesID));
+    return pg_execute($conn, "client_insert", array($fname, $lname, $phone, $extension, $email, $salesID));
 }
 
 /**
@@ -111,8 +118,86 @@ function sign_in_msg()
     
     $sign_in = '<div style="text-align: center;" class="alert alert-success" role="alert">Sign in succesful'.$login_victory.'</div>';
 
-    return setMessage($sign_in);
+   
+    return  setMessage($sign_in);
 }
+
+
+//OBTAIN USER TYPE
+$user_type_select = pg_prepare($conn, "user_type_select", "SELECT * FROM users WHERE type=$1");
+
+/**
+ *  for getting the type of user from
+ * type column in table
+ */
+function user_type_select($type){
+    global $conn;
+    return pg_execute($conn, "user_type_select", array($type));
+}
+//OBTAIN CLIENT ASSOCIATED WITH SALESPERSON
+$salesperson_client_select = pg_prepare($conn, "salesperson_client_select", "SELECT * FROM clients WHERE salesperson_id=$1");
+
+/**
+ *  for getting salespersons client
+ * type column in table
+ */
+function salesperson_client_select($salesID){
+    global $conn;
+    return pg_execute($conn, "salesperson_client_select", array($salesID));
+}
+
+function get_client_id($salesID){
+    ;
+    if(pg_num_rows(salesperson_client_select($salesID)))
+    {
+        $raw_client = salesperson_client_select($salesID);
+        $result = pg_fetch_assoc($raw_client,0);
+        $client_id = $result['client_id'];
+     }
+     return $client_id;
+}
+
+
+//INSERT A CALL BY SALESPERSON
+$insert_call = pg_prepare($conn, "insert_call", "INSERT INTO calls(client_id, call_time, call_note ) VALUES ($1, $2, $3)");
+
+function insert_call($client, $call_time, $call_note){
+    global $conn;
+    return pg_execute($conn, "insert_call", array($client, $call_time ,$call_note));
+}
+
+//CLient ///////////////////////
+$client_select_all =  pg_prepare($conn, "client_select_all", "SELECT client_id, email, first_name, last_name, phone_number, extension, logo_path FROM clients LIMIT $1 OFFSET $2");
+
+function   client_select_all($page){
+
+
+}
+
+function client_count()
+{
+
+}
+
+
+// AGENT////////////////////
+$agent_select_all = pg_prepare();
+
+function agent_select_all($page){
+    $result = user_select_all($page);
+}
+
+function agent_count()
+{
+    return pg_num_rows(user_select_all(AGENT));
+
+    $result = user_select_all('a');
+    $count = pg_num_rows($result);
+    $arr = array();
+    for ($i = ())
+
+}
+
 
 
 ?>

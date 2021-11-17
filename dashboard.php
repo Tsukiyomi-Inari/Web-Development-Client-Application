@@ -17,8 +17,6 @@ $author = "bellmank";
 $description = "User dashboard page for WEBD3201 course project";
 
 include "./includes/header.php";
-//var_dump($_SESSION['user']);
-
 if(!isset($_SESSION['user']))
 {
     redirect("sign-in.php");
@@ -35,10 +33,10 @@ else
 
 <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
-    <button class="btn btn-sm btn-outline-secondary">Share</button>
-    <button class="btn btn-sm btn-outline-secondary">Export</button>
+    <button class="btn btn-sm btn-outline-dark">Share</button>
+    <button class="btn btn-sm btn-outline-dark">Export</button>
     </div>
-    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+    <button class="btn btn-sm btn-outline-dark dropdown-toggle">
     <span data-feather="calendar"></span>
     This week
     </button>

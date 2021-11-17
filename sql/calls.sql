@@ -9,12 +9,17 @@ DROP SEQUENCE IF EXISTS call_id_seq CASCADE;
 CREATE SEQUENCE call_id_seq START 9000;
 
 CREATE TABLE calls (
-    id INT PRIMARY KEY DEFAULT nextval('calls_id_seq'),
-    client_name VARCHAR(128),
+    call_id INT PRIMARY KEY DEFAULT nextval('call_id_seq'),
+    client_id INT,
     call_time TIMESTAMP,
+    call_note VARCHAR,
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
 );
 
-INSERT INTO calls ('Matt' ,'2020-06-22 19:10:25');
-INSERT INTO calls ('Johanna' ,'2020-08-10 12:15:26');
+INSERT INTO calls ( client_id, call_time, call_note )  
+VALUES(5000,'2020-06-22 19:10:25', 'post-register call');
+
+INSERT INTO calls ( client_id, call_time, call_note ) 
+VALUES(5001,'2020-08-10 12:15:26', 'courtesy introduction call');
 
 SELECT * FROM calls;

@@ -2,12 +2,11 @@
 -- @student-ID: 100325825
 -- @course: WEBD3201
 -- @date: September 12, 2012
+DROP TABLE IF EXISTS users;
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 DROP SEQUENCE IF EXISTS users_id_seq CASCADE;
 CREATE SEQUENCE users_id_seq START 1000;
-
-DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id INT PRIMARY KEY DEFAULT nextval('users_id_seq'),
@@ -32,6 +31,10 @@ VALUES ('kbellman@gmail.ca',crypt('got_password', gen_salt('bf')),'Keith', 'Bell
 
 INSERT INTO users (email_address, password, first_name, last_name, last_access, enrol_date, enable, type) 
 VALUES ('salem@gmail.ca',crypt('catPass', gen_salt('bf')),'Salem', 'Bellman','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 's');
+
+INSERT INTO users (email_address, password, first_name, last_name, last_access, enrol_date, enable, type) 
+VALUES ('bellmanart@gmail.com',crypt('bellmanart', gen_salt('bf')),'Katherine', 'Bellman','2020-06-22 19:10:25', '2020-08-22 11:11:11', true, 'a');
+
 
 
 SELECT * FROM users;

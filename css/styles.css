@@ -5,19 +5,15 @@
 */
 
 html {
-  background: url(../images/micro_grid.jpg) repeat;
+  background: url(../images/micro_grid.jpg) repeat rgba(255,255,255,0.26);
   background-size:cover;
 }
 
 body {
   font-size: .875rem;
-    
+  background-color: rgba(255,255,255,0.56);
   }
 
-  main {
-    background-color:transparent !important;
-  }
-  
   .feather {
     width: 16px;
     height: 16px;
@@ -36,6 +32,7 @@ body {
     z-index: 100; /* Behind the navbar */
     padding: 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background-color: rgba(198, 207, 249, 0.73);
   }
   
   .sidebar-sticky {
@@ -59,7 +56,7 @@ body {
   }
   
   .sidebar .nav-link.active {
-    color: #007bff;
+    color: #9999 ;
   }
   
   .sidebar .nav-link:hover .feather,
@@ -75,13 +72,16 @@ body {
   /*
    * Navbar
    */
-  
+.navbar{
+    background-color: #c6cff9;
+}
   .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
     font-size: 1rem;
-    background-color: #9999cc;
-    box-shadow: inset -1px 0 0 #9999cc;
+    background-color: #Dde6ff;
+    box-shadow: inset -1px 0 0 #Dde6ff;
+
   }
   
   .navbar .form-control {
@@ -138,6 +138,21 @@ a:hover {
   font-weight: 700;
 }
 
+.cover-heading{
+  padding-top: 1em;
+  padding-right: 20px;
+  float: left;
+}
+
+object{
+  alignment: center;
+  margin-left:15px;
+}
+
+.index-p{
+  padding-top: 4em;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -166,4 +181,10 @@ a:hover {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+/*table */
+
+.table-responsive{
+  background-color: rgba(255,255,255,0.46);
 }

@@ -15,7 +15,12 @@ $description = "Sales People Registration page for WEBD3201 course project";
 
 include "./includes/header.php";
 
-if(!(isset($_SESSION['user']['type'])&&($_SESSION['user']['type']==ADMIN))){
+if(!(isset($_SESSION['type'])&&($_SESSION['type']==ADMIN))){
+
+    $shall_not_pass = '<div style="text-align: center;" class="alert alert-warning" role="alert">You do not have access to that page. Error: Incorrect User Type Found </div>';
+    $_SESSION['message'] = setMessage($shall_not_pass);
+    $message = $_SESSION['message'];
+    unset($_SESSION['message']);
     redirect("sign-in.php");
 }
 
@@ -28,11 +33,11 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $password2 = "";
 
 }elseif($_SERVER["REQUEST_METHOD"] == "POST"){
-    $fName = trim($_POST["inputFName"]);
-    $lName = trim($_POST["inputLName"]);
-    $email_address = trim($_POST["inputEmail"]);
-    $password = trim($_POST["inputPassword"]);
-    $password2 = trim($_POST["confirmPassword"]);
+    $fName = trim($_POST["first_name"]);
+    $lName = trim($_POST["last_name"]);
+    $email_address = trim($_POST["email"]);
+    $password = trim($_POST["password"]);
+    $password2 = trim($_POST["password2"]);
     //validate first name
     if(!isset($fName) || $fName == ""){
         $error .= "You must enter your first name.<br/>";
@@ -82,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
 
 
     <?php 
-    echo $message; 
+  
     //salesperson = user
     $form_salesperson = array( //outter array
                                 array(//inner array [0]
@@ -114,11 +119,25 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                                     "name" => "password2",
                                     "value" => "",
                                     "label" => "Confirm Password",
-                                )
+                                ),
+                                array(//inner array [6]
+                                    "type" => "submit",
+                                    "name" => "",
+                                    "value" => "",
+                                    "label" => "Register",
+                                ),
+                                array(//inner array [7]
+                                    "type" => "reset",
+                                    "name" => "",
+                                    "value" => "",
+                                    "label" => "Clear",
+                                ),
                             );
 
     display_form($form_salesperson);
 
+
+    
     ?>
 
                     

@@ -27,13 +27,16 @@ if ((! isset($_SESSION['token'])) || ($_POST['token'] != $_SESSION['token']))
 ?> 
 
 
-<?php $message; ?> 
- <h1 class="cover-heading "><object style="opacity:0.5;" data="./images/cpu.svg" width="80" height="80"> </object><strong>WEBD 3201</strong></h1>
-<p class="lead ">&nbsp;&nbsp;Course project for Computer Programming and Analysis (CPA) at Durham College. Study focus is on PHP,
+<?php $message; ?>
+<div>
+ <h1 class="cover-heading"><object style="opacity:0.5;" data="./images/cpu.svg" width="80" height="80"> </object><br/><strong>WEBD <br/> 3201</strong></h1>
+
+<p class="lead index-p ">&nbsp;&nbsp;Course project for Computer Programming and Analysis (CPA) at Durham College. Study focus is on PHP,
                  PostgreSQL, java script and creating a user interface through session. </p>
 <p class="lead">
-    <a href="https://durhamcollege.ca/programs/computer-programming-analyst-three-year" class="btn btn-lg btn-secondary">Learn more </a>
+    <a href="https://durhamcollege.ca/programs/computer-programming-analyst-three-year" class="btn btn-lg btn-dark">Learn more </a>
 </p>
+</div>
 
 
 <?php

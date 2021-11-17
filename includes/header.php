@@ -51,8 +51,9 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><object style="opacity:0.5; z-index:-2;" data="./images/cpu.svg" width="25" height="25"> </object>WEBD 3201</a>
+<!--NAV BAR-->
+  <nav class="navbar navbar-light sticky-top flex-md-nowrap p-0 border-bottom border-secondary">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-dark " href="index.php"><object style="opacity:0.5; z-index:-2;" data="./images/cpu.svg" width="20" height="20" class="d-inline-block align-top"> </object>WEBD 3201</a>
         <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <?php if(isset($_SESSION['user']))
@@ -67,10 +68,11 @@
         </li>
         </ul>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid  ">
       <div class="row">
-        
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<!--NAV BAR END-->
+<!--SIDEBAR-->
+        <nav class="col-md-2 d-none d-md-block sidebar">
             <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -95,8 +97,7 @@
                 </li>
                 <li class="nav-item">
                 <?php
-                if(isset($_SESSION['user']['type'])&&($_SESSION['type']==ADMIN))
-                {
+                if(isset($_SESSION['type']) && ($_SESSION['type']==ADMIN)){
 
                     echo '<a class="nav-link active" href="salespeople.php">
                         <span data-feather="home"></span>
@@ -107,21 +108,35 @@
                 </li>   
                 <li class="nav-item">
                 <?php
-                if(isset($_SESSION['user']['type'])&&($_SESSION['type']==ADMIN))
-                {
-
+                if(isset($_SESSION['type']) && ($_SESSION['type']==ADMIN)){
+                //($_SESSION['type']=="s") {
                     echo '<a class="nav-link active" href="clients.php">
                         <span data-feather="home"></span>
                         Clients Registration <span class="sr-only">(current)</span>
                         </a>';
                 }
+            //}
+                
+                elseif(isset($_SESSION['type']) && ($_SESSION['type']==AGENT)){
+                //($_SESSION['type']=="s") {
+                    echo '<a class="nav-link active" href="clients.php">
+                        <span data-feather="home"></span>
+                        Clients Registration <span class="sr-only">(current)</span>
+                        </a>';
+                }
+            //}
                 ?>
                 </li>   
                 <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    Orders
-                </a>
+                 <?php
+                if(isset($_SESSION['type']) && ($_SESSION['type']==AGENT)){
+                
+                    echo '<a class="nav-link active" href="calls.php">
+                        <span data-feather="home"></span>
+                        Log Calls <span class="sr-only">(current)</span>
+                        </a>';
+                }
+                ?>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -149,7 +164,7 @@
                 </li>
             </ul>
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-secondary ">
                 <span>Saved reports</span>
                 <a class="d-flex align-items-center text-muted" href="#">
                 <span data-feather="plus-circle"></span>
@@ -183,6 +198,6 @@
             </ul>
             </div>
         </nav>
-
-        <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-transparent ">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 bg-transparent text-dark ">
+<!--SIDEBAR END-->
+          <main class=" col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 " >
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 text-dark ">

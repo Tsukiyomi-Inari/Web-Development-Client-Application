@@ -29,5 +29,8 @@
     define ("DB_PASSWORD", "Webd2022@2020b");
 
 
+    /****** OTHER CONSTANTS ******/
+    define("MAX_FILE_SIZE","3000000");
+
     
 ?>

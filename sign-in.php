@@ -35,6 +35,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     //determine if sucessfully signed in
     if(user_authenticate($email_address, $password))
     {
+        //var_dump(user_update_login_time($email_address));
         fwrite($handle, "Sign in  at [".$now."] by user [".$email_address."] success.\n");
 
         //message for if successful, that includes welcome message from variable
@@ -67,10 +68,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <input type="email" name="inputEmail" id="inputEmail" class="form-control focus" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <input type="password" name="inputPassword" id="inputPassword" class="form-control focus" placeholder="Password" required>
+    <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
 </form>
 
 <?php
