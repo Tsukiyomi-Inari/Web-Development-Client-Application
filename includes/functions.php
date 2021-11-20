@@ -242,14 +242,16 @@ function display_table($arrfieldtable,$client_select_all, $agent_count,$page)
     echo  '<table class="table table-striped table-sm">';
     echo '<thread>';
     echo '<tr>';
-    foreach($arrfieldtable as $key => $value){
+    foreach($arrfieldtable as $key => $value)
+    {
         echo '<th>'.$value.'</th>';
     }
     echo '</tr>';
     echo '</thread>';
     echo '<tbody>';
-    echo '<tr>';
-    for ($i = 0, $i < count($client_select_all); $i++;){
+    for ($i = 0, $i < count($client_select_all); $i++;)
+    {
+        echo '<tr>';
         foreach($client_select_all[$i] as $key1 => $value1)
         {
             if($key1 == 'logo_path')
@@ -263,7 +265,6 @@ function display_table($arrfieldtable,$client_select_all, $agent_count,$page)
         }
         echo '</tr>';
     }
-
     echo '</tbody>';
     echo '</table>';
     echo '<nav aria-label="Page navigation">';

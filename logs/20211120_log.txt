@@ -1,0 +1,2 @@
+Logged out at [2021-11-20 13:22:51] by user [jdoe@dcmail.ca] .
+Sign in  at [2021-11-20 13:22:59] by user [jdoe@dcmail.ca] success.

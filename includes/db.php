@@ -279,7 +279,7 @@ function agent_count()
 ////////////////////////// Change Password ///////////////////////////////////////////////////////
 $user_update_password = pg_prepare($conn, "user_update_password", "UPDATE users SET password = $1 WHERE email_address = $2");
 
-function user_update_password($password)
+function user_update_password($password, $_SESSION['email'])
 {
     global $conn;
     return pg_execute($conn, "user_update_password", array(password_hash($password, PASSWORD_BCRYPT), $_SESSION['email']));

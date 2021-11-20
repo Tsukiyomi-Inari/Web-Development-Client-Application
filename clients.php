@@ -205,10 +205,14 @@ $form_client = array( //outter array
                     );
 
     display_form($form_client);
-    $page = 1;
+
     if(isset($_GET['page']))
     {
         $page = $_GET['page'];
+    }
+    else
+    {
+        $page = 1;
     }
     // FULL client table view for ADMIN
     if($_SESSION['type']==ADMIN)

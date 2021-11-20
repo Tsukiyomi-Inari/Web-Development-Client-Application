@@ -32,7 +32,7 @@
     /****** OTHER CONSTANTS ******/
     define("MAX_FILE_SIZE",3000000);
     define("3MB", "3MB");
-
-    define("RECORDS","10");
+    define("PASS_MIN", 3);
+    define("RECORDS", 10);
     
 ?>

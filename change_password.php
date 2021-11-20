@@ -75,6 +75,10 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST") {
      $error .="You must confirm your new password. <br/>";
 
     }
+    elseif($password < PASS_MIN || $confirm < PASS_MIN)
+    {
+        $error .= "Password must be at least ".PASS_MIN." characters long. <br/>";
+    }
     elseif(strcmp($password, $confirm) == 1){
      $error .= "Submitted password and confirm password should be the same. <br/>";
     }
@@ -86,9 +90,10 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST") {
      $error2 = "";
     }
     else{
-     user_update_password($password);
+        //Successful password change
+     user_update_password($password, $_SESSION['email']);
 
-    global $user_password_change;
+     global $user_password_change;
      setMessage($user_password_change) ;
      $message = getMessage();
      redirect("./dashboard.php");
