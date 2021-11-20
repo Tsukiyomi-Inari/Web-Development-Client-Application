@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     }
     else{
         fwrite($handle, "Sign in attempt at [".$now."] by user [".$email_address."] fail.\n");
-        $sign_in_fail ='<div class="alert alert-warning" role="alert"> Login unsucessful </div>';
+        global $sign_in_fail ;
         setMessage($sign_in_fail);
         $message = getMessage();
         unset($_SESSION['message']);

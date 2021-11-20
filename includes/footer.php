@@ -8,16 +8,17 @@
  * 
  */
 ?>
-
-                </div>
-            <footer>
-              <div >
-                <p class="mt-5 mb-3 text-muted text-center"> <?php displayCopyrightInfo(); displayValidationInfo() ?> </p>
+            </div>
+</div>
+            </div>
+        </div>
+    </div>
+        </main>
+            <footer class="pt-3 align-items-center " >
+              <div class="footer align-bottom mt-2 pt-2 pb-2 text-sm-center  align-self-center " id="footer" >
+               <?php displayCopyrightInfo(); displayValidationInfo() ?>
+                  <link class="text-muted" href="../tests.php" >
           </div>
               </footer>
-        </main>  
-       </div>
-    </div>
-
   </body>
 </html>

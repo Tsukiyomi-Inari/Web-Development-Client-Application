@@ -15,15 +15,16 @@ $description = "Sales People Registration page for WEBD3201 course project";
 
 include "./includes/header.php";
 
+
 if(!(isset($_SESSION['type'])&&($_SESSION['type']==ADMIN))){
 
-    $shall_not_pass = '<div style="text-align: center;" class="alert alert-warning" role="alert">You do not have access to that page. Error: Incorrect User Type Found </div>';
-    $_SESSION['message'] = setMessage($shall_not_pass);
-    $message = $_SESSION['message'];
+    global $shall_not_pass;
+    setMessage($shall_not_pass);
+//    $message = $_SESSION['message'];
     unset($_SESSION['message']);
     redirect("sign-in.php");
 }
-
+unset($_SESSION['message']);
 $error ="";
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     $email_address = "";
@@ -73,7 +74,8 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     }
     else{
         insert_user($email_address, $password, $fName, $lName, date('Y-m-d G:i:s'));
-        setMessage('<div style="text-align: center;" class="alert alert-success" role="alert">You succesfully registered<br/> the sales person</div>') ;
+        global $sales_person_success_register;
+        setMessage($sales_person_success_register) ;
     }
 
     if(isset($_SESSION['message'])){
@@ -135,13 +137,27 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                             );
 
     display_form($form_salesperson);
-
-
-    
+    $page = 1;
+    if(isset($_GET['page']))
+    {
+        $page = $_GET['page'];
+    }
+    display_table(
+        array(
+            "id" => "ID",
+            "email_address" => "Email",
+            "first_name" => "First Name",
+            "last_name" => "Last Name",
+            "last_access" => "Last Access",
+            "enrol_date" => "Enrollment Date",
+        ),
+        agent_select_all($page),
+        agent_count(),
+        $page
+    );
     ?>
 
-                    
-                     
+
 <?php
 include "./includes/footer.php";
 ?>

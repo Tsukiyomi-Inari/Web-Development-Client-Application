@@ -80,7 +80,7 @@ function user_exists($email){
     return (pg_num_rows($result) >=1)?true:false;
 }
 
-//USER LOGIN
+///////////////////////////USER LOGIN FORM ///////////////////////////////////
 $user_update_login_time = pg_prepare($conn, "user_login_time", "UPDATE users SET last_access=$1 WHERE email_address=$2");
 
 function user_update_login_time($email){
@@ -90,7 +90,7 @@ function user_update_login_time($email){
     return pg_execute($conn, "user_login_time", array($now, $email));
 }
 
-//AGENT REGISTER
+/////////////////AGENT REGISTER FORM  //////////////////////////////
 $user_insert = pg_prepare($conn, "user_insert","INSERT INTO users(email_address, password, first_name, last_name, enrol_date, enable, type) VALUES ($1, $2, $3, $4, $5, true, 'a')");
 
 function insert_user($email, $password, $fname, $lname, $enroldate)
@@ -100,12 +100,12 @@ function insert_user($email, $password, $fname, $lname, $enroldate)
     return pg_execute($conn, "user_insert", array($email,password_hash($password, PASSWORD_BCRYPT),$fname, $lname, $enroldate));
 }
 
-// CLIENT REGISTER
-$client_insert = pg_prepare($conn, "client_insert", "INSERT INTO clients(first_name, last_name, phone_number, extension, email_address, salesperson_id ) VALUES ($1, $2, $3, $4, $5, $6)");
+///////////// CLIENT REGISTER FORM //////////////////////////////
+$client_insert = pg_prepare($conn, "client_insert", "INSERT INTO clients(first_name, last_name, phone_number, extension, email_address, logo_path,salesperson_id ) VALUES ($1, $2, $3, $4, $5, $6, $7)");
 
-function insert_client($fname, $lname, $phone, $extension, $email, $salesID){
+function insert_client($fname, $lname, $phone, $extension, $email, $logo_path, $salesID){
     global $conn;
-    return pg_execute($conn, "client_insert", array($fname, $lname, $phone, $extension, $email, $salesID));
+    return pg_execute($conn, "client_insert", array($fname, $lname, $phone, $extension, $email, $logo_path, $salesID));
 }
 
 /**
@@ -123,7 +123,7 @@ function sign_in_msg()
 }
 
 
-//OBTAIN USER TYPE
+//////////////////OBTAIN USER TYPE FOR PAGE ACCESS AND SPECIAL VIEWS////////////////////////////////////
 $user_type_select = pg_prepare($conn, "user_type_select", "SELECT * FROM users WHERE type=$1");
 
 /**
@@ -134,7 +134,7 @@ function user_type_select($type){
     global $conn;
     return pg_execute($conn, "user_type_select", array($type));
 }
-//OBTAIN CLIENT ASSOCIATED WITH SALESPERSON
+/////////////////////////OBTAIN CLIENT ASSOCIATED WITH SALESPERSON DROPDOWN ON FORM//////////////////////////
 $salesperson_client_select = pg_prepare($conn, "salesperson_client_select", "SELECT * FROM clients WHERE salesperson_id=$1");
 
 /**
@@ -146,6 +146,10 @@ function salesperson_client_select($salesID){
     return pg_execute($conn, "salesperson_client_select", array($salesID));
 }
 
+/**
+ * @param $salesID
+ * @return clients associated with specific sales person
+*/
 function get_client_id($salesID){
     ;
     if(pg_num_rows(salesperson_client_select($salesID)))
@@ -158,46 +162,127 @@ function get_client_id($salesID){
 }
 
 
-//INSERT A CALL BY SALESPERSON
+/////////////////INSERT A CALL BY SALESPERSON/////////////////////////////////
+
 $insert_call = pg_prepare($conn, "insert_call", "INSERT INTO calls(client_id, call_time, call_note ) VALUES ($1, $2, $3)");
 
+/**
+ * @params $client $call_time, $call_note
+ * @return enters call data into table
+*/
 function insert_call($client, $call_time, $call_note){
     global $conn;
     return pg_execute($conn, "insert_call", array($client, $call_time ,$call_note));
 }
 
-//CLient ///////////////////////
-$client_select_all =  pg_prepare($conn, "client_select_all", "SELECT client_id, email, first_name, last_name, phone_number, extension, logo_path FROM clients LIMIT $1 OFFSET $2");
+////////////CLient Table ///////////////////////
 
-function   client_select_all($page){
+$my_clients_select_all =  pg_prepare($conn, "my_clients_select_all", "SELECT client_id, email_address, first_name, last_name, phone_number, extension, logo_path FROM clients WHERE salesperson_id=$1" );
+$client_select_all =  pg_prepare($conn, "client_select_all", "SELECT client_id, email_address, first_name, last_name, phone_number, extension, logo_path FROM clients");
 
 
+/**
+ * @param $page
+ * builds table with ALL clients for ADMIN
+ */
+function   client_select_all($page)
+{
+    global $conn;
+
+    $result = pg_execute($conn,"client_select_all", array());
+    $count = pg_num_rows($result);
+    $arr = array();
+    for($i = ($page-1)*RECORDS; $i < $count && $i <$page*RECORDS; $i++)
+    {
+        array_push($arr,pg_fetch_assoc($result, $i));
+    }
+    return $arr;
 }
 
+/**
+ * @return table for clients of specific salesperson
+*/
+function   salesperson_client_select_all($page, $salesID)
+{
+    global $conn;
+    $result = pg_execute($conn,"my_clients_select_all", array($salesID));
+    $count = pg_num_rows($result);
+    $arr = array();
+    for($i = ($page-1)*RECORDS; $i < $count && $i <$page*RECORDS; $i++)
+    {
+        array_push($arr,pg_fetch_assoc($result, $i));
+    }
+    return $arr;
+}
+
+
+/**
+ * @return total count of clients in table
+ */
 function client_count()
 {
-
+    global $conn;
+    return pg_execute($conn, "client_select_all", array());
 }
 
-
-// AGENT////////////////////
-$agent_select_all = pg_prepare();
-
-function agent_select_all($page){
-    $result = user_select_all($page);
-}
-
-function agent_count()
+/**
+ * @return total clients of specific salesperson
+*/
+function salesperson_client_count($salesID)
 {
-    return pg_num_rows(user_select_all(AGENT));
+    global $conn;
+
+    return pg_execute($conn, "my_clients_select_all", array($salesID));
+}
+
+
+///////////////////// AGENT Table////////////////////////////////
+
+$user_select_all = pg_prepare($conn, "user_select_all", "SELECT id,email_address,first_name, last_name, enrol_date FROM users WHERE type=$1");
+
+/**
+ * @return records that are only of specified user type
+*/
+function user_select_all($type)
+{
+    global $conn;
+    return pg_execute($conn, "user_select_all", array($type));
+}
+
+/**
+ * @param $page
+ * @return array() with each part of records
+ * for display in pagination
+*/
+function agent_select_all($page)
+{
+//    $result = user_select_all($page);
 
     $result = user_select_all('a');
     $count = pg_num_rows($result);
     $arr = array();
-    for ($i = ())
-
+    for ($i = ($page-1)*RECORDS; $i < $count && $i <$page*RECORDS; $i++)
+    {
+        array_push($arr, pg_fetch_assoc($result, $i));
+    }
+    return $arr;
 }
 
+/**
+ * @return total count of users with type AGENT
+*/
+function agent_count()
+{
+    return pg_num_rows(user_select_all(AGENT));
+}
 
+////////////////////////// Change Password ///////////////////////////////////////////////////////
+$user_update_password = pg_prepare($conn, "user_update_password", "UPDATE users SET password = $1 WHERE email_address = $2");
+
+function user_update_password($password)
+{
+    global $conn;
+    return pg_execute($conn, "user_update_password", array(password_hash($password, PASSWORD_BCRYPT), $_SESSION['email']));
+}
 
 ?>

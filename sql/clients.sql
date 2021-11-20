@@ -2,7 +2,6 @@
 -- @student-ID: 100325825
 -- @course: WEBD3201
 -- @date: October 12th 2021
-
 DROP TABLE IF EXISTS clients;
 
 DROP SEQUENCE IF EXISTS client_id_seq CASCADE;

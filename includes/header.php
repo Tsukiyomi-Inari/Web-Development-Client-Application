@@ -1,7 +1,8 @@
-<!DOCTYPE html PUBLIC 
+<!DOCTYPE html PUBLIC
 "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
   <head>
 <?php
 /*
@@ -52,29 +53,37 @@
   </head>
   <body>
 <!--NAV BAR-->
-  <nav class="navbar navbar-light sticky-top flex-md-nowrap p-0 border-bottom border-secondary">
+  <nav class="navbar  navbar-light sticky-top flex-md-nowrap p-0 border-bottom border-secondary">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0 text-dark " href="index.php"><object style="opacity:0.5; z-index:-2;" data="./images/cpu.svg" width="20" height="20" class="d-inline-block align-top"> </object>WEBD 3201</a>
-        <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap ">
             <?php if(isset($_SESSION['user']))
                     {
-                        echo '<a class="nav-link" href="logout.php">Sign out</a>';
+                        echo '<a class="nav-link btn btn-sm btn-outline-secondary pt-0 pb-0 pl-1 pr-1 text-secondary" href="logout.php">Sign out</a>';
                     }
                     else
                     {
-                        echo '<a class="nav-link" href="sign-in.php">Sign in</a>';
+                        echo '<a class="nav-link btn btn-sm btn-outline-dark pt-0 pb-0 pl-1 pr-1 text-dark" href="sign-in.php">Sign in</a>';
                     }
                     ?>
         </li>
+
         </ul>
     </nav>
-    <div class="container-fluid  ">
+    <div class="container-fluid container wrapper" name="main_container" style="min-height:82vh">
       <div class="row">
 <!--NAV BAR END-->
 <!--SIDEBAR-->
-        <nav class="col-md-2 d-none d-md-block sidebar">
-            <div class="sidebar-sticky">
+        <nav class="col-md-2 d-none d-md-block sidebar" >
+            <div class="sidebar-sticky " >
             <ul class="nav flex-column">
+                <li class="pt-2 nav-item">
+                    <?php if(isset($_SESSION['user']))
+                    {
+                        echo '<a class="nav-link" href="change_password.php">Change Password</a>';
+                    }
+                    ?>
+                </li>
                 <li class="nav-item">
 
                 <?php
@@ -163,7 +172,6 @@
                 </a>
                 </li>
             </ul>
-
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-secondary ">
                 <span>Saved reports</span>
                 <a class="d-flex align-items-center text-muted" href="#">
@@ -195,9 +203,10 @@
                     Year-end sale
                 </a>
                 </li>
+
             </ul>
             </div>
         </nav>
 <!--SIDEBAR END-->
           <main class=" col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 " >
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 text-dark ">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 text-dark " >

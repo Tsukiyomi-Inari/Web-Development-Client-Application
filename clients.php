@@ -15,9 +15,7 @@ $author = "bellmank";
 $description = "Clients page for WEBD3201 course project";
 
 include "./includes/header.php";
-//var_dump($_SESSION['user']);
-//var_dump($user);
-//var_dump( getMessage());
+
 if(!(isset($_SESSION['type'])&&($_SESSION['type']==AGENT || $_SESSION['type']==ADMIN)))
 {
     $shall_not_pass = '<div style="text-align: center;" class="alert alert-warning" role="alert">You do not have access to that page. Error: Incorrect User Type Found </div>';
@@ -26,7 +24,7 @@ if(!(isset($_SESSION['type'])&&($_SESSION['type']==AGENT || $_SESSION['type']==A
     unset($_SESSION['message']);
     redirect("sign-in.php");
 }
-
+unset($_SESSION['message']);
 $error ="";
 if($_SERVER["REQUEST_METHOD"] == "GET"){
     $fName = "";
@@ -34,75 +32,104 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
     $phone_number = "";
     $extension = "";
     $email_address = "";
-    //$sales_person = ""; // no idea if this will reset it
 
-}elseif($_SERVER["REQUEST_METHOD"] == "POST"){
+}elseif($_SERVER["REQUEST_METHOD"] == "POST")
+{
     $fName = trim($_POST["inputFName"]);
     $lName = trim($_POST["inputLName"]);
     $phone_number = trim($_POST["inputPhone"]);
     $extension = trim($_POST["inputExtension"]);
     $email_address = trim($_POST["inputEmail"]);
     $sales_person = $_POST['sales_person'];
-    //$sales_person = $_POST["sales_person"]; // when admin only
+
+
     //validate first name
-    if(!isset($fName) || $fName == ""){
+    if(!isset($fName) || $fName == "")
+    {
         $error .= "You must enter your first name.<br/>";
     }
     //validate last name
-    if(!isset($lName) || $lName == ""){
+    if(!isset($lName) || $lName == "")
+    {
         $error .= "You must enter your last name.<br/>";
     }
     //validate phone number
-    if(!isset($phone_number) || $phone_number == ""){
+    if(!isset($phone_number) || $phone_number == "")
+    {
         $error .= "You must enter a phone number.<br/>";
     }
-    elseif(!(validate_phone_number($phone_number))){
+    elseif(!(validate_phone_number($phone_number)))
+    {
         $error .= " You must enter a valid 10 digit(local) phone number. <br/>";
     }
-    if((validate_extension_number($extension)==false)){
+    if((validate_extension_number($extension)==false))
+    {
         $error .= "Extensions can only be max 4 digits. <br/>";
     }
-    if($extension == ""){
+    if($extension == "")
+    {
         $extension = "null";
     }
-    if(!isset($email_address) || $email_address == ""){
+    if(!isset($email_address) || $email_address == "")
+    {
         $error .= "You must enter your e-mail.<br/>";
     }
-    elseif(!(filter_var($email_address, FILTER_VALIDATE_EMAIL))){
+    elseif(!(filter_var($email_address, FILTER_VALIDATE_EMAIL)))
+    {
         $error .= "<em>".$email_address."</em> is not a valid e-mail address.<br/>";
         $email_address = "";
     }
-    if(isset($sales_person) && $sales_person==-1){
-        $error .= "You must select sales person.<br/>";
+    if(isset($sales_person) && $sales_person==-1)
+    {
+        $error .= "You must select sales person. <br/>";
     }
+ if (count($_FILES) > 0) {
+     $logo_url = $_FILES['logo']['name'];
     //File validation
-    if($_FILES['uploadfileName']['error'] != 0)
+    if($_FILES['logo']['error'] != 0)
     {
         $error .= "Problem uploading your file.";
     }
-    elseif ($_FILES['uploadfileName']['size'] > MAX_FILE_SIZE) // in bytes
+    elseif($_FILES['logo']['type'] != "image/jpeg" && $_FILES['logo']['type'] != "image/pjpeg" && $_FILES['logo']['type'] != "image/jpg")
+    {
+        $error .= "Your profile pictures must be of type JPEG";
+    }
+    elseif($_FILES['logo']['size'] > MAX_FILE_SIZE) // in bytes
+    {
+        $error .= "File selected is too big, file must be smaller than 3MB (".ini_get("upload_max_filesize")."B)";
+    }
+    else //valid file for processing! YEY
     {
 
+        $logo_url = "./files_uploaded/" . $email_address . "new_file.jpg";
+        //Move the file from temp to the appropriate folder with new file name
+        move_uploaded_file($_FILES['logo']['tmp_name'], $logo_url);
     }
-
-    if($error == ""){
-        if(isset($_SESSION['type'])&&($_SESSION['type']==AGENT)){
+ }
+    if($error == "")
+    {
+        if(isset($_SESSION['type'])&&($_SESSION['type']==AGENT))
+        {
             $user_id = $_SESSION['id'];
         }
-        else{
+        else
+        {
             $user_id = $sales_person;
         }
-        insert_client($fName, $lName, $phone_number, $extension, $email_address, $user_id);
-        $client_reg = '<div style="text-align: center;" class="alert alert-success" role="alert">Successfully registered a client</div>';
+        insert_client($fName, $lName, $phone_number, $extension, $email_address,$logo_url, $user_id);
+        global $client_reg;
         setMessage($client_reg);
         $fName = "";
         $lName = "";
         $phone_number = "";
         $extension = "";
         $email = "";
-    }else{
+    }
+    else
+    {
         //concatenation errors, show try again
-        if($error !=""){
+        if($error !="")
+        {
         $error .= "<br/> <strong><em>Please Try Again</em></strong>";
         $error2 = '<div style="text-align: center;" class="alert alert-warning" role="alert"> '.$error.' </div>';
         setMessage($error2);
@@ -110,11 +137,13 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
         $error2 = "";
         }
     }
-    if(isset($_SESSION['message'])){
+    if(isset($_SESSION['message']))
+    {
         $message = $_SESSION['message'];
         unset($_SESSION['message']);
     }
 }
+
 ?>
   <?php   
     //Client form array
@@ -150,10 +179,10 @@ $form_client = array( //outter array
                             "label" => "Extension",
                         ),
                         array(//inner array [5]
-                            "type" => "select",
-                            "name" => "sales_person",
+                            "type" => "file",
+                            "name" => "uploadfileName",
                             "value" => "",
-                            "label" => "Select Salesperson",
+                            "label" => "Select file for upload",
                         ),
                         array(//inner array [6]
                             "type" => "select",
@@ -176,7 +205,45 @@ $form_client = array( //outter array
                     );
 
     display_form($form_client);
-    
+    $page = 1;
+    if(isset($_GET['page']))
+    {
+        $page = $_GET['page'];
+    }
+    // FULL client table view for ADMIN
+    if($_SESSION['type']==ADMIN)
+    {
+         display_table( array(
+                "client_id" => "ID",
+                "email_address" => "Email",
+                "first_name" => "First Name",
+                "last_name" => "Last Name",
+                "phone_number" => "Phone Number",
+                "logo_path" => "Logo"),
+            client_select_all($page),
+            client_count(),
+            $page
+        );
+    }
+    //Salesperson specific table view
+    else
+    {
+         display_table(
+            array(
+                "client_id" => "ID",
+                "email_address" => "Email",
+                "first_name" => "First Name",
+                "last_name" => "Last Name",
+                "phone_number" => "Phone Number",
+                "logo_path" => "Logo",
+            ),
+            salesperson_client_select_all($page,$_SESSION['id']),
+            salesperson_client_count($_SESSION['id']),
+            $page
+        );
+
+    }
+
 ?>
 <?php
 include "./includes/footer.php";

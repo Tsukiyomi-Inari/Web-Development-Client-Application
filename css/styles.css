@@ -14,6 +14,8 @@ body {
   background-color: rgba(255,255,255,0.56);
   }
 
+
+
   .feather {
     width: 16px;
     height: 16px;
@@ -22,7 +24,16 @@ body {
   
   /*
    * Sidebar
+   .sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
    */
+
   
   .sidebar {
     position: fixed;
@@ -56,7 +67,7 @@ body {
   }
   
   .sidebar .nav-link.active {
-    color: #9999 ;
+    color: #343a40 ;
   }
   
   .sidebar .nav-link:hover .feather,
@@ -187,4 +198,32 @@ object{
 
 .table-responsive{
   background-color: rgba(255,255,255,0.46);
+}
+
+
+
+#footer {
+  background-color: rgba(198, 207, 249, 0.89); !important;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
 }

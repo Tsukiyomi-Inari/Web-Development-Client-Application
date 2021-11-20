@@ -1,0 +1,3 @@
+Logged out at [2021-11-19 11:08:52] by user [salem@gmail.ca] .
+Sign in attempt at [2021-11-19 11:09:11] by user [jdoe@dcmail.ca] fail.
+Sign in  at [2021-11-19 11:10:38] by user [jdoe@dcmail.ca] success.

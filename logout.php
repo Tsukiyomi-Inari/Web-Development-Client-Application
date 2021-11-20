@@ -27,9 +27,11 @@ $handle =fopen("./logs/".$today."_log.txt",'a');
                         session_unset();
                         //destory the session
                         session_destroy();
+                        //cookie
+                        setCookie("login_id", null, time() + COOKIE_LIFESPAN);
                         //start the session
                         session_start();
-                        $logout = '<div class="alert alert-success" role="alert">You sucessfully logged out.</div>';
+                        global $logout;
                         setMessage($logout);
                         //$message = getMessage();
                         //unset($_SESSION['message']);

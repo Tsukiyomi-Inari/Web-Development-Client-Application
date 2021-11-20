@@ -82,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET"){
                                     "label" => "Select Client",
                                 ),
                                 array(//inner array [1]
-                                    "type" => "datetime",
+                                    "type" => "datetime-local",
                                     "name" => "call_time",
                                     "value" => "",
                                     "label" => "Call Time",

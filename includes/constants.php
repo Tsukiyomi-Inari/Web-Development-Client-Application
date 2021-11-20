@@ -10,7 +10,7 @@
  */
 
     /******* COOKIES ******/
-    define("COOKIE_LIFESPAN", "259000"); // NOTE: 60x60x24x30 aka default value of one month
+    define("COOKIE_LIFESPAN", 259000); // NOTE: 60x60x24x30 aka default value of one month
 
     /******* USER TYPES ********/
 
@@ -30,7 +30,9 @@
 
 
     /****** OTHER CONSTANTS ******/
-    define("MAX_FILE_SIZE","3000000");
+    define("MAX_FILE_SIZE",3000000);
+    define("3MB", "3MB");
 
+    define("RECORDS","10");
     
 ?>

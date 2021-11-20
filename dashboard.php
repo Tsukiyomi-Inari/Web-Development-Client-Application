@@ -19,6 +19,8 @@ $description = "User dashboard page for WEBD3201 course project";
 include "./includes/header.php";
 if(!isset($_SESSION['user']))
 {
+    global $denied;
+    setMessage($denied);
     redirect("sign-in.php");
 }
 else
